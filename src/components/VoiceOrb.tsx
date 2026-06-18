@@ -28,7 +28,7 @@ export default function VoiceOrb({
       type="button"
       onClick={onClick}
       aria-label={label ?? "Talk"}
-      className="group relative grid place-items-center rounded-full outline-none"
+      className="group relative grid place-items-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-violet/60"
       style={{ width: size, height: size }}
     >
       {/* expanding rings while listening */}

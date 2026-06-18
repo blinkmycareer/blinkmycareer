@@ -22,22 +22,58 @@ export default function TalkPage() {
   }, [messages]);
 
   return (
-    <div className="grain relative flex h-screen flex-col overflow-hidden">
+    <div className="grain relative flex h-dvh flex-col overflow-hidden">
       <Aurora />
 
       {/* top bar */}
-      <header className="relative z-10 flex items-center justify-between px-5 py-4 sm:px-8">
+      <header className="relative z-10 flex shrink-0 items-center justify-between px-5 py-4 sm:px-8">
         <Wordmark />
-        <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs text-muted">
+        <span className="hidden items-center gap-2 rounded-full glass px-3 py-1 text-xs text-muted sm:inline-flex">
           <span className="h-1.5 w-1.5 rounded-full bg-amber" />
           Preview · voice &amp; live AI coming online
         </span>
       </header>
 
-      {/* split */}
-      <main className="relative z-10 grid flex-1 grid-rows-[1fr_auto] gap-0 overflow-hidden lg:grid-cols-[1fr_1fr] lg:grid-rows-1">
-        {/* conversation */}
-        <section className="flex min-h-0 flex-col px-5 sm:px-8">
+      {/* split: mobile = resume on top / talk below; desktop = side by side */}
+      <main className="relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row">
+        {/* RESUME — order-1 on mobile (top), order-2 on desktop (right) */}
+        <section className="order-1 flex max-h-[42dvh] min-h-0 items-start justify-center overflow-y-auto border-b border-white/5 bg-ink-2/30 px-5 py-5 sm:px-8 lg:order-2 lg:max-h-none lg:flex-1 lg:items-center lg:border-b-0 lg:border-l">
+          <div className="w-full">
+            <LiveResume resume={resume} sharpenedId={sharpenedId} />
+
+            <AnimatePresence>
+              {done && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mx-auto mt-6 flex max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center"
+                >
+                  <button className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-ink transition hover:opacity-90">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    Download free
+                  </button>
+                  <Link
+                    href="/"
+                    className="text-sm text-muted underline-offset-4 transition hover:text-foreground hover:underline"
+                  >
+                    This is a preview — see the vision
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </section>
+
+        {/* CONVERSATION — order-2 on mobile (bottom, orb in thumb reach) */}
+        <section className="order-2 flex min-h-0 flex-1 flex-col px-5 sm:px-8 lg:order-1 lg:flex-initial lg:w-1/2">
           <div
             ref={scrollRef}
             className="flex-1 space-y-3 overflow-y-auto py-4 pr-1"
@@ -77,12 +113,12 @@ export default function TalkPage() {
             </AnimatePresence>
           </div>
 
-          {/* orb dock */}
-          <div className="shrink-0 border-t border-white/5 py-5">
-            <div className="flex items-center justify-center gap-5">
+          {/* orb dock — bottom of the conversation column */}
+          <div className="shrink-0 border-t border-white/5 pt-5 pb-11">
+            <div className="flex items-center justify-center">
               <VoiceOrb
                 state={orb}
-                size={104}
+                size={100}
                 onClick={done ? undefined : step}
                 label={
                   orb === "listening"
@@ -103,42 +139,6 @@ export default function TalkPage() {
                 Replay the demo
               </button>
             )}
-          </div>
-        </section>
-
-        {/* resume */}
-        <section className="relative flex min-h-0 items-center justify-center border-t border-white/5 bg-ink-2/30 px-5 py-6 sm:px-8 lg:border-l lg:border-t-0">
-          <div className="w-full">
-            <LiveResume resume={resume} sharpenedId={sharpenedId} />
-
-            <AnimatePresence>
-              {done && (
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mx-auto mt-6 flex max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center"
-                >
-                  <button className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-ink transition hover:opacity-90">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    Download free
-                  </button>
-                  <Link
-                    href="/"
-                    className="text-sm text-muted underline-offset-4 transition hover:text-foreground hover:underline"
-                  >
-                    This is a preview — see the vision
-                  </Link>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </section>
       </main>

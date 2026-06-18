@@ -181,6 +181,13 @@ body {
   background: rgba(139, 92, 255, 0.35);
   color: #fff;
 }
+
+/* Visible keyboard focus everywhere (we removed default outlines on the orb) */
+:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

@@ -25,6 +25,14 @@ export default function Home() {
             Start talking
           </Link>
         </nav>
+
+        {/* compact CTA for mobile */}
+        <Link
+          href="/talk"
+          className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-ink transition hover:opacity-90 sm:hidden"
+        >
+          Start talking
+        </Link>
       </header>
 
       {/* Hero */}
