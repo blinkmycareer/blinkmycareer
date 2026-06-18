@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BlinkMyCareer
 
-## Getting Started
+> *Working name — confirm trademark + domain before committing.*
 
-First, run the development server:
+**One-line pitch:** You don't write a resume and then prep for interviews. You have one honest conversation — and walk away hireable on paper and ready in the room.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What this is
+A conversation-first career tool. You talk; an AI interviews you about your work. From that single conversation it builds your resume live, keeps your real stories as one source of truth, tailors to any job, then flips into an interviewer that drills you on your own stories — tracking two scores: **Paper-ready** and **Room-ready**. The resume export is always free; we monetize tailoring, testing, simulation, and tracking.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The reinvention (the "iPhone move")
+The industry treats resume-building and interview-prep as two chores with two tools. They're the same thing — your work story, on paper and out loud. We collapse them into **one conversation** with **one source of truth**, so resume and interview answers stay in sync and improve together. No blank page. Talk, and it builds.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Why it's not just "ask ChatGPT"
+The conversation isn't the moat — the **system around it** is: a structured Career Brain (not a transcript), a polished living resume, a longitudinal readiness engine, the sync loop, and company-specific realism — all orchestrated so the user never has to know the steps. Like the iPhone, the value is the packaged experience, not the raw parts. (Full argument in `VISION.md` §5.)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Documents
+- **`VISION.md`** — the idea, the broken category assumption, the reinvention, day-in-the-life, the moat / why-not-ChatGPT answer, north-star principles.
+- **`SPEC.md`** — the defensible system, core features, the sync loop, screens, data model, tech approach, free-vs-paid, MVP phases, guardrails, open decisions.
 
-## Learn More
+## Status
+Concept locked. Next: build Phase 1 — the conversation → live resume → free export "magic moment."
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Immediate to-dos before/while building
+1. Trademark + domain check on the name.
+2. Decide voice-first vs. chat-first for MVP.
+3. Pick LLM provider + set per-feature cost ceilings.
+4. Lawyer-light review of claims (practice/prep positioning; no "guaranteed job" language).

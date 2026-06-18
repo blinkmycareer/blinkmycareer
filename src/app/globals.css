@@ -1,26 +1,189 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   BlinkMyCareer — design system
+   "The Blink": the moment your career comes into focus.
+   Deep cinematic ink, a living aurora, paper-bright resume.
+   ============================================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
+  /* Canvas — deep cool ink, not flat black */
+  --color-ink: #07070b;
+  --color-ink-2: #0c0c14;
+  --color-ink-3: #14141f;
+
+  /* Text */
+  --color-foreground: #ececf2;
+  --color-muted: #8b8b9c;
+  --color-faint: #56566a;
+
+  /* Signature aurora stops */
+  --color-violet: #8b5cff;
+  --color-indigo: #5b7cff;
+  --color-coral: #ff7a66;
+  --color-amber: #ffb45c;
+
+  /* Paper — the resume is literal bright paper against the dark */
+  --color-paper: #ffffff;
+  --color-paper-ink: #15161a;
+  --color-paper-muted: #5b5d68;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-editorial: var(--font-editorial);
+
+  --radius-xl2: 1.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: var(--color-ink);
+  --foreground: var(--color-foreground);
+}
+
+html {
+  background: var(--color-ink);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------- Editorial accent (the emotional words) ---------- */
+.editorial {
+  font-family: var(--font-editorial), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Signature gradient text ---------- */
+.text-aurora {
+  background: linear-gradient(
+    100deg,
+    var(--color-amber) 0%,
+    var(--color-coral) 28%,
+    var(--color-violet) 62%,
+    var(--color-indigo) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aurora-pan 9s ease-in-out infinite;
+}
+
+/* ---------- Living aurora background ---------- */
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120vh;
+  pointer-events: none;
+  filter: blur(60px) saturate(135%);
+  opacity: 0.55;
+  z-index: 0;
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+.aurora::before {
+  width: 60vw;
+  height: 60vw;
+  left: -8vw;
+  top: -10vw;
+  background: radial-gradient(circle at 30% 30%, var(--color-violet), transparent 60%);
+  animation: drift-a 18s ease-in-out infinite;
+}
+.aurora::after {
+  width: 52vw;
+  height: 52vw;
+  right: -6vw;
+  top: 4vw;
+  background: radial-gradient(circle at 70% 40%, var(--color-coral), transparent 60%);
+  animation: drift-b 22s ease-in-out infinite;
+}
+
+/* ---------- Glass surfaces ---------- */
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+}
+.glass-strong {
+  background: rgba(18, 18, 28, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(28px);
+}
+
+/* ---------- Grain to kill banding ---------- */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes aurora-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 6vh) scale(1.12); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(-7vw, 5vh) scale(0.95); }
+}
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 255, 0.45); }
+  50% { transform: scale(1.04); box-shadow: 0 0 60px 14px rgba(139, 92, 255, 0.35); }
+}
+@keyframes ring-pulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-orb { animation: orb-breathe 3.6s ease-in-out infinite; }
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  background: var(--color-violet);
+  vertical-align: -0.12em;
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+/* ---------- Misc ---------- */
+::selection {
+  background: rgba(139, 92, 255, 0.35);
+  color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
