@@ -1,0 +1,13 @@
+# Firebase App Hosting — runtime config for the BlinkMyCareer Next.js app.
+# https://firebase.google.com/docs/app-hosting/configure
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+# Server-side env vars / secrets get added here as the engine comes online, e.g.:
+# env:
+#   - variable: LLM_API_KEY
+#     secret: llm-api-key
